@@ -9,8 +9,7 @@ COPY requirements.txt .
 
 # Upgrade pip and install dependencies
 RUN pip install --upgrade pip \
-    && pip install -r requirements.txt \
-    && pip install splunk-opentelemetry
+    && pip install -r requirements.txt 
 
 # Copy app code
 COPY app/ ./app
@@ -19,5 +18,5 @@ COPY app/ ./app
 EXPOSE 5000
 
 # Command to run
-CMD ["opentelemetry-instrument", "python", "app/main.py"]
+CMD ["python", "app/main.py"]
 

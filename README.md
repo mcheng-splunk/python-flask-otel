@@ -25,13 +25,13 @@ python-app/
 
 ---
 
-## Python Auto-Instrumentation
+## Python Auto-Instrumentation Using Dockerfile 
 
-The application uses **Splunk OpenTelemetry Python Agent** for auto-instrumentation.  
+The application uses **Splunk OpenTelemetry Python Agent** for auto-instrumentation if we are not going to use the **zero-code instrumentation**
 
 Key points:
 
-1. The Python runtime **must be 3.9+** to avoid compatibility issues with the OpenTelemetry agent (Python 3.7 will fail due to `functools.cached_property` import errors).  
+1. The Python runtime **must be 3.11+** to avoid compatibility issues with the OpenTelemetry agent (Python 3.7 will fail due to `functools.cached_property` import errors).  
 2. Auto-instrumentation is enabled by running the app via:
 
 ```bash
@@ -64,7 +64,7 @@ CMD ["opentelemetry-instrument", "python", "app/main.py"]
 
 Run the app using opentelemetry-instrument to enable telemetry
 
-Kubernetes Deployment
+## Kubernetes Deployment (Instrumenting via zero-code instrumentation)
 
 The application can be deployed using a Deployment + Service.
 
@@ -88,7 +88,7 @@ env:
 
 3. Ensure imagePullPolicy: Always for fresh image pulls
 
-## Build & Run
+## Build & Run for Multi Platform
 
 Build Multi-Platform Docker Image
 ```bash
