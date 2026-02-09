@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-flask-app
+  labels:
+    app: python-flask-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-flask-app
+  template:
+    metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "otel/splunk-otel-collector"
+      labels:
+        app: python-flask-app
+    spec:
+      containers:
+        - name: python-flask-app
+          image: melcheng/python-flask-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          # Optional: environment variables for OTel
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://splunk-otel-collector-agent.otel.svc.cluster.local:4318"
+            - name: OTEL_SERVICE_NAME
+              value: "python-flask-app"
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "deployment.environment=dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-flask-app
+spec:
+  selector:
+    app: python-flask-app
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 5000
