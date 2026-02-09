@@ -6,7 +6,7 @@ This repository contains a minimal **Python 3.x Flask application** that is conf
 
 ## Requirements
 
-- Python **3.9 or higher** (3.11 recommended)
+- Python **3.11 or higher** (3.11 tested working)
 - Flask >= 2.3.0
 - Docker
 - Kubernetes cluster (any platform)
