@@ -16,12 +16,13 @@ This repository contains a minimal **Python 3.x Flask application** that is conf
 
 ## Project Structure
 
+```text
 python-app/
 ├─ app/
 │ └─ main.py # Flask application
 ├─ requirements.txt # Python dependencies
 └─ Dockerfile # Dockerfile with OTel instrumentation
-
+```
 
 ---
 
